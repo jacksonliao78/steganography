@@ -9,7 +9,15 @@ def encode():
     image = Image.open(input("Enter your image with extension: "), 'r')
     
     msg = input("Type in a message to encode: ")
-    encodedImage = image.copy()
+
+    newImage = image.copy().convert('RGB')
+
+    r, g, b = newImage.getpixel((1, 1))
+
+    
+    
+def newPix():
+    pass
 
 def encodeMsg(img, msg):
     pass
