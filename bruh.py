@@ -15,9 +15,9 @@ def encode():
 
     r, g, b = newImage.getpixel((1, 1))
 
-    newPix(newImage, toBinary(msg))
+    newImage.putdata(encodePix(newImage, toBinary(msg)))
     
-def newPix(img, msg):
+def encodePix(img, msg):
     
     imageData = list(img.getdata())
     modifiedData = []
@@ -32,17 +32,8 @@ def newPix(img, msg):
                 val[-1] = '1'
             temp[j] = int(''.join(val), 2) 
         modifiedData.append(tuple(temp))
-    modifiedData += imageData[len(modifiedData):]
-        
-            
-
-
-
-    
-def encodeMsg(img, msg):
-    pass
-    
-
+    modifiedData += imageData[len(modifiedData):]        
+    return modifiedData
 
 encode()
     
