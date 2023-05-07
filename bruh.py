@@ -64,8 +64,24 @@ def decode():
         if msg[-5:] == '@@@@@':
             break
         i += 8
-    print(msg[:-5])
+    if '@@@@@' in msg:    
+        print(msg[:-5])
+    else:
+        print('No decoded message was found.')
 
-#encode()
-decode()
+#for terminal use, won't be helpful for the actual website
+def main():
+
+    option = int(input("Enter 1 if you want to encode an image and 2 if you want to decode an image: "))
+
+    if option == 1:
+        encode()
+    elif option == 2:
+        decode()
+    else:
+        raise Exception("Not a valid option.")
+
+if __name__ == '__main__':
+    main()
+
     
