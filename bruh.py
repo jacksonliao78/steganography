@@ -49,20 +49,22 @@ def encode_pix(img, msg):
 def decode():
     msg = ''
     image = Image.open(input("Enter your image with extension: "))
-    print(list(image.getdata())[:10])
 
-    image_data = ""
-    for pixel in list(image.getdata())[:10]:
+    image_data = ''
+    for pixel in list(image.getdata()):
         r, g, b = tuple(pixel)
         r, g, b = bin(r)[2:].zfill(8), bin(g)[2:].zfill(8), bin(b)[2:].zfill(8)
         image_data += '0' if r[-1] == '0' else '1'
         image_data += '0' if g[-1] == '0' else '1'
         image_data += '0' if b[-1] == '0' else '1'
-
-    print(image_data)
-
-    while True:
-        pass
+    
+    i = 0
+    while i < len(image_data):
+        msg += chr(int(image_data[i:i+8], 2))
+        if msg[-5:] == '@@@@@':
+            break
+        i += 8
+    print(msg[:-5])
 
 #encode()
 decode()
