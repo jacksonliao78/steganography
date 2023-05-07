@@ -14,11 +14,9 @@ def encode():
 
     new_image = image.copy().convert('RGB')
 
-    r, g, b = new_image.getpixel((1, 1))
-
     new_image.putdata(encode_pix(new_image, to_binary(msg)))
     new_image_name = input("Enter the new image name with extension: ")
-    new_image.save(new_image_name)
+    new_image.save(new_image_name, 'PNG')
     
 def encode_pix(img, msg):
     
