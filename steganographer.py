@@ -2,6 +2,8 @@
 from flask import Flask, render_template, request
 from PIL import Image
 
+app = Flask(__name__)
+
 def to_binary(msg):
     binary = [(format(ord(word), '08b')) for word in msg]
     return [*''.join(binary)]
@@ -79,6 +81,15 @@ def main():
         decode()
     else:
         raise Exception("Not a valid option.")
+
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
+
+
 
 if __name__ == '__main__':
     main()
