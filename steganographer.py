@@ -8,18 +8,14 @@ def to_binary(msg):
     binary = [(format(ord(word), '08b')) for word in msg]
     return [*''.join(binary)]
 
-def encode():
-    image = Image.open(input("Enter your image with extension: "), 'r')
-    
-    msg = input("Type in a message to encode: ") 
+def encode(img, msg):
     #to detect the end of a message
     msg += "@@@@@"
 
-    new_image = image.copy().convert('RGB')
+    new_image = img.copy().convert('RGB')
 
     new_image.putdata(encode_pix(new_image, to_binary(msg)))
-    new_image_name = input("Enter the new image name with extension: ")
-    new_image.save(new_image_name, 'PNG')
+    return new_image
     
 def encode_pix(img, msg):
     
@@ -47,12 +43,11 @@ def encode_pix(img, msg):
     modified_data += image_data[len(modified_data):]        
     return modified_data
 
-def decode():
+def decode(img):
     msg = ''
-    image = Image.open(input("Enter your image with extension: "))
 
     image_data = ''
-    for pixel in list(image.getdata()):
+    for pixel in list(img.getdata()):
         r, g, b = tuple(pixel)
         r, g, b = bin(r)[2:].zfill(8), bin(g)[2:].zfill(8), bin(b)[2:].zfill(8)
         image_data += '0' if r[-1] == '0' else '1'
@@ -66,9 +61,9 @@ def decode():
             break
         i += 8
     if '@@@@@' in msg:    
-        print(msg[:-5])
+        return msg[:-5]
     else:
-        print('No decoded message was found.')
+        return "No decoded message was found."
 
 #for terminal use, won't be helpful for the actual website
 def main():
@@ -87,11 +82,23 @@ def main():
 def home():
     return render_template('index.html')
 
+@app.route('/encode')
+def encode_img():
+    image = request.files['image']
+    msg = request.form['message']
+    encoded_image = encode(image, msg)
+    return "Doanload the image here: <a href='/static/encoded_image.png'>Download</a>"
 
+
+
+@app.route('/decode')
+def decode_img():
+    image = request.files['image']
+    return decode(image)
 
 
 
 if __name__ == '__main__':
-    main()
+    app.run(debug=True)
 
     
