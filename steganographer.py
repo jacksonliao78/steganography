@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from PIL import Image
 
 app = Flask(__name__)
@@ -87,7 +87,7 @@ def encode_img():
     image = request.files['image']
     msg = request.form['message']
     encoded_image = encode(image, msg)
-    return "Doanload the image here: <a href='/static/encoded_image.png'>Download</a>"
+    return "Download the image here: <a href='/static/encoded_image.png'>Download</a>"
 
 
 
