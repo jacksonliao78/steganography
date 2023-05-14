@@ -1,5 +1,6 @@
 
 from flask import Flask, render_template, request, redirect, url_for
+from io import BytesIO
 from PIL import Image
 
 app = Flask(__name__)
@@ -82,23 +83,31 @@ def main():
 def home():
     return render_template('index.html')
 
-@app.route('/encode')
+@app.route('/encode', methods=['POST'])
 def encode_img():
-    image = request.files['image']
+    image_byte = request.files['image']
+    image = Image.open(BytesIO(image_byte.read()))
+   
     msg = request.form['message']
+
     encoded_image = encode(image, msg)
-    return "Download the image here: <a href='/static/encoded_image.png'>Download</a>"
+    encoded_image.save('static/encoded_image.png')
+    return redirect(url_for('download_encoded_image'))
 
+@app.route('/download')
+def download_encoded_image():
+    return redirect('/static/encoded_image.png', code=307)
 
-
-@app.route('/decode')
+@app.route('/decode', methods=['POST'])
 def decode_img():
-    image = request.files['image']
-    return decode(image)
+    image_byte = request.files['image']
+    image = Image.open(BytesIO(image_byte.read()))
+
+    decoded_msg = decode(image)
+    return decoded_msg
 
 
 
 if __name__ == '__main__':
     app.run(debug=True)
 
-    
