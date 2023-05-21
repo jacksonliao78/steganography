@@ -15,7 +15,7 @@
             <input type="file" name="image">
             <input type="text" name="message" placeholder="Message">
             <button type="submit">Encode</button>
-            <a href="{{ url_for('download_encoded_image') }}" target="_blank">Download</a>
+            <button type="button" onclick="downloadEncodedImage()" class="download">Open encoded image</button>
             </form>
         </div>
         <h2>Decode</h2>
@@ -27,4 +27,5 @@
         </div>
     </div>
 </body>
+<script src="/static/js/index.js"></script>
 </html>

@@ -91,12 +91,9 @@ def encode_img():
     msg = request.form['message']
 
     encoded_image = encode(image, msg)
-    encoded_image.save('static/encoded_image.png')
-    return redirect(url_for('download_encoded_image'))
+    encoded_image.save('static/images/encoded_image.png')
 
-@app.route('/download')
-def download_encoded_image():
-    return redirect('/static/encoded_image.png', code=307)
+    return redirect(url_for('home'))
 
 @app.route('/decode', methods=['POST'])
 def decode_img():
