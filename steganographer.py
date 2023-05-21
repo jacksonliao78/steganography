@@ -66,7 +66,7 @@ def decode(img):
     else:
         return "No decoded message was found."
 
-#for terminal use, won't be helpful for the actual website
+#for terminal use, won't be helpful for website
 def main():
 
     option = int(input("Enter 1 if you want to encode an image and 2 if you want to decode an image: "))
@@ -106,8 +106,7 @@ def decode_img():
     decoded_msg = decode(image)
     return decoded_msg
 
-
-
 if __name__ == '__main__':
     app.run(debug=True)
 
+#source .venv/bin/activate 
