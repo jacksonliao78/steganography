@@ -23,7 +23,6 @@ html, body {
     margin-top: 100px;
     margin-left: 15%;
     margin-right: 15%;
-    text-align: center;
     background-color: #395B64;
 }
 .first h2{
@@ -31,12 +30,14 @@ html, body {
     text-align: left;
     padding-left: 20px;
 }
+.message {
+    height: 100px;
+    width: 300px;
+}
 .download {
     margin-left: 40px;
 }
 .row {
-    align-items: center;
     display: flex;
-    flex-direction: horizontal;
     padding: 20px;
 }
