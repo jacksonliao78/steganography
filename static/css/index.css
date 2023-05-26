@@ -28,6 +28,7 @@ html, body {
 .first h2{
     padding-top: 30px;
     text-align: left;
+    transition: 0.5s ease;
 }
 .area {
     display: flex;
@@ -41,4 +42,12 @@ html, body {
 }
 .change-button {
     width: 150px;
+}
+[data-value="Decode"]:hover {
+    color: green;
+    transition: 0.5s ease;
+}
+[data-value="Encode"]:hover {
+    color: red;
+    transition: 0.5s ease;
 }

@@ -53,3 +53,19 @@ h2s.forEach((h2) => {
         }, 40);
     }
 });
+
+function validateEncode() {
+    const image = document.querySelector("form[action = '/encode'] input[name='image']");
+    if(image.files.length === 0) {
+        alert( "Please select an image")
+        return false;
+    }
+}
+
+function validateDecode() {
+    const image = document.querySelector("form[action = '/decode'] input[name='image']");
+    if(image.files.length === 0) {
+        alert( "Please select an image")
+        return false;
+    }
+}
