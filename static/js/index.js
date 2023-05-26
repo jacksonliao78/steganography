@@ -1,4 +1,5 @@
 
+//redirects user to the encoded image in a new tab
 function downloadEncodedImage() {
     window.open('/static/images/encoded_image.png', '_blank');
 }
@@ -54,6 +55,7 @@ h2s.forEach((h2) => {
     }
 });
 
+//checks to see if an image has been selected
 function validateEncode() {
     const image = document.querySelector("form[action = '/encode'] input[name='image']");
     if(image.files.length === 0) {
@@ -62,6 +64,7 @@ function validateEncode() {
     }
 }
 
+//checks to see if an image has been selected
 function validateDecode() {
     const image = document.querySelector("form[action = '/decode'] input[name='image']");
     if(image.files.length === 0) {

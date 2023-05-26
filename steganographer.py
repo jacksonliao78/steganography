@@ -17,9 +17,11 @@ def encode(img, msg):
 
     new_image = img.copy().convert('RGB')
 
+    #converting pixels and putting them into image copy
     new_image.putdata(encode_pix(new_image, to_binary(msg)))
     return new_image
     
+#changes the LSB of the each rgb value in a pixel
 def encode_pix(img, msg):
     
     image_data = list(img.getdata())
@@ -46,12 +48,15 @@ def encode_pix(img, msg):
     modified_data += image_data[len(modified_data):]        
     return modified_data
 
+#attempts to decode an image's data
 def decode(img):
     msg = ''
-
     image_data = ''
+
+    #cycles thorugh each pixel
     for pixel in list(img.convert('RGB').getdata()):
         
+        #takes r, g, and b val from each pixel and extracts the LSB to add to the dataa
         r, g, b = tuple(pixel)
         r, g, b = bin(r)[2:].zfill(8), bin(g)[2:].zfill(8), bin(b)[2:].zfill(8)
         image_data += '0' if r[-1] == '0' else '1'
@@ -59,11 +64,15 @@ def decode(img):
         image_data += '0' if b[-1] == '0' else '1'
     
     i = 0
+
+    #loops through data until it reaches the stop (@@@@@) or the end
     while i < len(image_data):
         msg += chr(int(image_data[i:i+8], 2))
         if msg[-5:] == '@@@@@':
             break
         i += 8
+
+    #returns message if stop is found, else says no message found
     if '@@@@@' in msg:    
         return msg[:-5]
     else:
@@ -86,6 +95,7 @@ def main():
 def home():
     return render_template('index.html')
 
+#handles encoding form
 @app.route('/encode', methods=['POST'])
 def encode_img():
     image_byte = request.files['image']
@@ -93,11 +103,13 @@ def encode_img():
    
     msg = request.form['message']
 
+    #encodes image and saves it
     encoded_image = encode(image, msg)
     encoded_image.save('static/images/encoded_image.png')
 
     return redirect(url_for('home'))
 
+#handles decoding form
 @app.route('/decode', methods=['POST'])
 def decode_img():
     image_byte = request.files['image']
@@ -108,5 +120,3 @@ def decode_img():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-#source .venv/bin/activate 
