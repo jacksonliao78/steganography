@@ -5,10 +5,12 @@ from PIL import Image
 
 app = Flask(__name__)
 
+#returns a string to it's binary equivalent list
 def to_binary(msg):
     binary = [(format(ord(word), '08b')) for word in msg]
     return [*''.join(binary)]
 
+#encodes an image given an image and message
 def encode(img, msg):
     #to detect the end of a message
     msg += "@@@@@"
@@ -48,12 +50,9 @@ def decode(img):
     msg = ''
 
     image_data = ''
-    for pixel in list(img.getdata()):
-
-        if len(pixel) == 3:
-            r, g, b = tuple(pixel)
-        else:
-            r, g, b, o = tuple(pixel)
+    for pixel in list(img.convert('RGB').getdata()):
+        
+        r, g, b = tuple(pixel)
         r, g, b = bin(r)[2:].zfill(8), bin(g)[2:].zfill(8), bin(b)[2:].zfill(8)
         image_data += '0' if r[-1] == '0' else '1'
         image_data += '0' if g[-1] == '0' else '1'
