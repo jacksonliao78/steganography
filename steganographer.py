@@ -49,8 +49,11 @@ def decode(img):
 
     image_data = ''
     for pixel in list(img.getdata()):
-        
-        r, g, b = tuple(pixel)
+
+        if len(pixel) == 3:
+            r, g, b = tuple(pixel)
+        else:
+            r, g, b, o = tuple(pixel)
         r, g, b = bin(r)[2:].zfill(8), bin(g)[2:].zfill(8), bin(b)[2:].zfill(8)
         image_data += '0' if r[-1] == '0' else '1'
         image_data += '0' if g[-1] == '0' else '1'
