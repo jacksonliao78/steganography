@@ -7,23 +7,33 @@
     <link rel="stylesheet" href="/static/css/index.css">
  </head>
 <body>
-    <h1 class="title">Steganography</h1>
+    <h1 class="title"></h1>
     <div class="first">
-        <h2>Encode</h2>
-        <div class="row">
-            <form action="/encode" method="POST" enctype="multipart/form-data">
-            <input type="file" name="image">
-            <input class="message" type="text" name="message" placeholder="Message">
+        <div class="area">
+            <div class="row">
+                <h2 data-value="Encode">Encode</h2>
+            </div>
+            <div class="row">
+                <form action="/encode" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image">
+            </div>
+            <div class="row">
+            <textarea rows="5" type="text" name="message" placeholder="Message"></textarea>
             <button type="submit">Encode</button>
-            <button type="button" onclick="downloadEncodedImage()" class="download">Open encoded image</button>
+            </div>
+            <div class="row">
+            <button class="change-button" type="button" onclick="downloadEncodedImage()">Open encoded image</button>
             </form>
+            </div>
         </div>
-        <h2>Decode</h2>
-        <div class="row">
+        <div class="area">
+            <div class="row">
+            <h2 data-value="Decode">Decode</h2>
             <form action="/decode" method="POST" enctype="multipart/form-data">
             <input type="file" name="image">
             <button type="submit">Decode</button>
             </form>
+            </div>
         </div>
     </div>
 </body>

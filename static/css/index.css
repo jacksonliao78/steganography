@@ -28,16 +28,17 @@ html, body {
 .first h2{
     padding-top: 30px;
     text-align: left;
-    padding-left: 20px;
 }
-.message {
-    height: 100px;
-    width: 300px;
-}
-.download {
-    margin-left: 40px;
+.area {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 .row {
     display: flex;
-    padding: 20px;
+    flex-direction: column;
+    padding: 10px;
+}
+.change-button {
+    width: 150px;
 }
